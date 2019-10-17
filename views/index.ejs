@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>首页</title>
+    <%- include head %>
+  </head>
+  <body>
+    <%- include('bar', {username: data.username}) %>
+
+    <div class="list">
+
+      <% data.list.map((ele, idx)=>{ %>
+        <div class="row">
+          <span><%= (idx+1) %></span>
+          <span><%= ele.username %></span>
+          <span><a href="/detail?id=<%= ele._id %>"><%= ele.title %></a></span>
+          <span><%= ele.createTimeZH %></span>
+          <span>
+            <a href="/write?id=<%= ele._id %>">编辑</a>
+            <a href="/articles/delete?id=<%= ele._id %>">删除</a>
+          </span>
+        </div>
+      <% }) %>
+
+      <div class="pages">
+        <% for(let i=1; i<=data.total; i++) { %>
+          <a href="/?page=<%= i %>"><%= i %></a>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>
